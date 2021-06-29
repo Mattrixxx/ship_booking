@@ -1,22 +1,14 @@
 <template>
   <div id="Table">
     <h1>Raft</h1>
-    <div id="search-add">
-      <b-row>
-        <b-col md="3">
-          <!-- search -->
-          <b-form-input
-            v-model="filter"
-            type="search"
-            placeholder="Search..."
-          ></b-form-input>
-        </b-col>
-        <!-- buttonAdd -->
-        <b-button variant="success" size="sm" @click="showModal_add"
-          ><b-icon icon="plus-square-fill"></b-icon
-        ></b-button>
-      </b-row>
+
+    <!-- buttonAdd -->
+    <div id="Add">
+      <b-button variant="success" size="sm" @click="showModal_add"
+        ><b-icon icon="plus-square-fill"></b-icon
+      ></b-button>
     </div>
+
     <div id="Table2">
       <b-table
         striped
@@ -154,7 +146,7 @@ export default {
       add: {
         name: '',
         des: '',
-        img: [],
+        img: null,
       },
       editItem: {
         id: '',
@@ -162,7 +154,7 @@ export default {
         des: '',
         // img: '',
       },
-      apiURL: 'https://infinite-gorge-44548.herokuapp.com/raft/',
+      apiURL: 'http://promtongyai.xyz:3000/raft/',
       filter: '',
       perPage: 10,
       currentPage: 1,
@@ -188,6 +180,7 @@ export default {
   methods: {
     //  fun add
     async postData() {
+      this.hideModal_add()
       let formData = new FormData()
       formData.append('file', this.add.img)
       formData.append('name', this.add.name)
@@ -196,7 +189,8 @@ export default {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       console.log(result)
-      this.$router.go()
+      const result1 = await axios.get(this.apiURL)
+      this.rafts = result1.data.data
     },
     //  fun delete
     async deleteData(id) {
@@ -226,6 +220,9 @@ export default {
     // show popup add
     showModal_add() {
       this.$refs['modal-add'].show()
+    },
+    hideModal_add() {
+      this.$refs['modal-add'].hide()
     },
     // show popup edit
     showModal_edit(item) {

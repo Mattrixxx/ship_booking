@@ -1,6 +1,6 @@
 <template>
   <div id="Table">
-    <h1>Boat <i class="fas fa-ship"></i></h1>
+    <h1>Package</h1>
     <!-- buttonAdd -->
     <div id="Add">
       <b-button variant="success" size="sm" @click="showModal_add"
@@ -14,7 +14,7 @@
           <b-table
             striped
             hover
-            :items="boats"
+            :items="packages"
             :filter="filter"
             :per-page="perPage"
             :current-page="currentPage"
@@ -64,16 +64,15 @@
               <!-- textAdd -->
               <b-modal ref="modal-add" hide-footer title="ADD">
                 <div class="d-block text-center"></div>
-                <!-- txt name -->
-                <b-form-group label="Name Boat:"
-                  ><b-form-input
-                    v-model="add.name"
-                    type="text"
-                    placeholder="Enter name"
-                  ></b-form-input
-                ></b-form-group>
-                <!-- txt img -->
-                <b-form-group label="Img Boat:">
+
+                <b-form-group label="Raftname:">
+                  <b-form-select
+                    v-model="add.raftId"
+                    :options="options"
+                  ></b-form-select>
+                </b-form-group>
+
+                <b-form-group label="Img Package:">
                   <b-form-file
                     ref="file"
                     v-model="add.img"
@@ -82,21 +81,30 @@
                     @change="handleFileUpload"
                   ></b-form-file
                 ></b-form-group>
-                <!-- txt  type-->
-                <b-form-group label="type Boat:">
-                  <b-form-input
-                    type="text"
-                    v-model="add.type"
-                    placeholder="Enter type"
-                  >
-                  </b-form-input>
-                </b-form-group>
-                <!-- txt value-->
-                <b-form-group label="Value Boat:">
+
+                <b-form-group label="Value Package:">
                   <b-form-input
                     type="text"
                     v-model="add.value"
                     placeholder="Enter value (INT)"
+                  >
+                  </b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Price Package:">
+                  <b-form-input
+                    type="text"
+                    v-model="add.price"
+                    placeholder="Enter price (INT)"
+                  >
+                  </b-form-input>
+                </b-form-group>
+
+                <b-form-group label="Description Package:">
+                  <b-form-input
+                    type="text"
+                    v-model="add.des"
+                    placeholder="Enter description"
                   >
                   </b-form-input>
                 </b-form-group>
@@ -163,17 +171,19 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'Boat',
+  name: 'Package',
   props: ['items'],
   data() {
     return {
+      rafts: [],
       deleteItem: null,
-      boats: [],
+      packages: [],
       add: {
-        name: '',
+        raftId: null,
         img: null,
-        type: '',
         value: '',
+        price: '',
+        des: '',
       },
       editItem: {
         id: '',
@@ -182,29 +192,35 @@ export default {
         type: '',
         value: '',
       },
-      apiURL: 'http://promtongyai.xyz:3000/boat/',
+      apiURL: 'http://promtongyai.xyz:3000/package/',
+      apiURL2: 'http://promtongyai.xyz:3000/raft/',
       filter: '',
       perPage: 10,
       currentPage: 1,
       fields: [
         { key: 'id', label: 'Id', sortable: true },
-        { key: 'name', label: 'Name' },
-        { key: 'img', label: 'Photo' },
-        { key: 'type', label: 'Type' },
+        { key: 'raft.name', label: 'Raft_name' },
+        { key: 'img', label: 'Imgage' },
         { key: 'value', label: 'Value' },
+        { key: 'price', label: 'Price' },
+        { key: 'des', label: 'Description' },
         { key: 'actions', label: 'Action' },
       ],
+      options: [],
     }
   },
   computed: {
     row() {
-      return this.boats.length
+      return this.packages.length
     },
   },
   //  fun show
   async mounted() {
     const result1 = await axios.get(this.apiURL)
-    this.boats = result1.data.data
+    this.packages = result1.data
+    const result2 = await axios.get(this.apiURL2)
+    this.rafts = result2.data.data
+    this.option()
   },
   methods: {
     //  fun add
@@ -213,15 +229,16 @@ export default {
       this.hideModal_add()
       let formData = new FormData()
       formData.append('file', this.add.img)
-      formData.append('name', this.add.name)
-      formData.append('type', this.add.type)
+      formData.append('raft_id', this.add.raftId)
+      formData.append('des', this.add.des)
       formData.append('value', this.add.value)
+      formData.append('price', this.add.price)
       const result = await axios.post(this.apiURL, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       console.log(result)
       const result1 = await axios.get(this.apiURL)
-      this.boats = result1.data.data
+      this.packages = result1.data
     },
     //  fun delete
     async deleteData(id) {
@@ -249,7 +266,7 @@ export default {
       this.$refs['modal-del'].hide()
     },
     // show popup add
-    showModal_add() {
+    async showModal_add() {
       this.$refs['modal-add'].show()
     },
     hideModal_add() {
@@ -267,6 +284,11 @@ export default {
     },
     handleFileUpload() {
       this.add.img = this.$refs.file.files[0]
+    },
+    async option() {
+      for (const value of this.rafts) {
+        this.options.push({ value: value.id, text: value.name })
+      }
     },
   },
 }

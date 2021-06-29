@@ -1,21 +1,12 @@
 <template>
   <div id="Table">
     <h1>Driver</h1>
-    <div id="search-add">
-      <b-row>
-        <b-col md="3">
-          <!-- search -->
-          <b-form-input
-            v-model="filter"
-            type="search"
-            placeholder="Search..."
-          ></b-form-input>
-        </b-col>
-        <!-- buttonAdd -->
-        <b-button variant="success" size="sm" @click="showModal_add"
-          ><b-icon icon="plus-square-fill"></b-icon
-        ></b-button>
-      </b-row>
+
+    <div id="Add">
+      <!-- buttonAdd -->
+      <b-button variant="success" size="sm" @click="showModal_add"
+        ><b-icon icon="plus-square-fill"></b-icon
+      ></b-button>
     </div>
 
     <div id="Table2">
@@ -161,7 +152,7 @@ export default {
         sname: '',
         phone: '',
       },
-      apiURL: 'https://infinite-gorge-44548.herokuapp.com/driver/',
+      apiURL: 'http://promtongyai.xyz:3000/driver/',
       filter: '',
       perPage: 10,
       currentPage: 1,
@@ -187,9 +178,11 @@ export default {
   methods: {
     //  fun add
     async postData() {
+      this.hideModal_add()
       const result = await axios.post(this.apiURL, this.add)
       console.log(result)
-      this.$router.go()
+      const result1 = await axios.get(this.apiURL)
+      this.drivers = result1.data.data
     },
     //  fun delete
     async deleteData(id) {
@@ -219,6 +212,9 @@ export default {
     // show popup add
     showModal_add() {
       this.$refs['modal-add'].show()
+    },
+    hideModal_add() {
+      this.$refs['modal-add'].hide()
     },
     // show popup edit
     showModal_edit(item) {
