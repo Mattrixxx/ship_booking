@@ -1,18 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import User from '../views/User.vue'
 import Raft from '../views/Rafts.vue'
 import Boat from '../views/Boats.vue'
 import Driver from '../views/Drivers.vue'
-import Test from '../views/test.vue'
+import Review from '../views/Reviews.vue'
+import Package from '../views/Packages.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/users',
+    name: 'User',
+    component: User,
   },
   {
     path: '/rafts',
@@ -30,9 +31,14 @@ const routes = [
     component: Driver,
   },
   {
-    path: '/test',
-    name: 'test',
-    component: Test,
+    path: '/reviews',
+    name: 'Review',
+    component: Review,
+  },
+  {
+    path: '/packages',
+    name: 'Package',
+    component: Package,
   },
 ]
 
