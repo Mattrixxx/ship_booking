@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "Frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,10 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vuetify": "^2.4.0"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.11.5",
@@ -30,11 +32,13 @@
     "popper.js": "^1.16.1",
     "portal-vue": "^2.1.7",
     "prettier": "2.3.1",
-    "sass": "^1.26.11",
+    "sass": "~1.32.0",
     "sass-loader": "^10.0.2",
     "vue-cli-plugin-axios": "^0.0.4",
     "vue-cli-plugin-bootstrap-vue": "^0.7.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-cli-plugin-vuetify": "^2.4.1",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.7.0"
   },
   "eslintConfig": {
     "root": true,
@@ -56,6 +60,5 @@
     "last 2 versions",
     "not dead"
   ],
-  "main": "index.js",
   "license": "MIT"
 }
