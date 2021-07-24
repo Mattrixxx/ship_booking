@@ -6,6 +6,8 @@ import Boat from '../views/Boats.vue'
 import Driver from '../views/Drivers.vue'
 import Review from '../views/Reviews.vue'
 import Package from '../views/Packages.vue'
+import Booking from '../views/Bookings.vue'
+import Sailing from '../views/Sailings.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +42,17 @@ const routes = [
     name: 'Package',
     component: Package,
   },
+  {
+    path: '/bookings',
+    name: 'Booking',
+    component: Booking,
+  },
+  {
+    path: '/sailings',
+    name: 'Sailing',
+    component: Sailing,
+  }
+
 ]
 
 const router = new VueRouter({
