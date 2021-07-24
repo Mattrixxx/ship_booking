@@ -1,5 +1,9 @@
 <template>
-  <div id="Table">
+  <div id="package">
+    <div>
+      <tabuser/>
+    </div>
+      <div id="Table">
     <h1>Package</h1>
     <!-- buttonAdd -->
     <div id="Add">
@@ -166,15 +170,20 @@
       </b-col>
     </b-row>
   </div>
+  </div>
+  
 </template>
 
 <script>
 import axios from 'axios'
+import tabuser from '../components/TabUser.vue'
 export default {
+  components:{tabuser},
   name: 'Package',
   props: ['items'],
   data() {
     return {
+      
       rafts: [],
       deleteItem: null,
       packages: [],

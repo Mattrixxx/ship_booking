@@ -1,14 +1,16 @@
 <template>
-  <div id="Table">
+  <div id="driver">
+    <div>
+      <tabuser/>
+    </div>
+    <div id="Table">
     <h1>Driver</h1>
-
+    <!-- buttonAdd -->
     <div id="Add">
-      <!-- buttonAdd -->
       <b-button variant="success" size="sm" @click="showModal_add"
         ><b-icon icon="plus-square-fill"></b-icon
       ></b-button>
     </div>
-
     <div id="Table2">
       <b-table
         striped
@@ -130,11 +132,15 @@
       </b-col>
     </b-row>
   </div>
+  </div>
+  
 </template>
 
 <script>
 import axios from 'axios'
+import tabuser from '../components/TabUser.vue'
 export default {
+  components:{tabuser},
   name: 'Driver',
   props: ['items'],
   data() {

@@ -1,6 +1,10 @@
 <template>
-  <div id="Table">
-    <h1>Boat <i class="fas fa-ship"></i></h1>
+  <div id="boat">
+    <div>
+      <tabuser/>
+    </div>
+    <div id="Table">
+    <h1>Boat</h1>
     <!-- buttonAdd -->
     <div id="Add">
       <b-button variant="success" size="sm" @click="showModal_add"
@@ -158,11 +162,15 @@
       </b-col>
     </b-row>
   </div>
+  </div>
+  
 </template>
 
 <script>
 import axios from 'axios'
+import tabuser from '../components/TabUser.vue'
 export default {
+  components:{tabuser},
   name: 'Boat',
   props: ['items'],
   data() {

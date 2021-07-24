@@ -1,6 +1,10 @@
 <template>
-  <div id="Table">
-    <h1>Review</h1>
+  <div id="review">
+    <div>
+      <tabuser/>
+    </div>
+     <div id="Table">
+    <h1>Review </h1>
 
     <div id="Table2">
       <b-table
@@ -50,11 +54,15 @@
       </b-col>
     </b-row>
   </div>
+  </div>
+ 
 </template>
 
 <script>
 import axios from 'axios'
+import tabuser from '../components/TabUser.vue'
 export default {
+  components:{tabuser},
   name: 'Review',
   props: ['items'],
   data() {

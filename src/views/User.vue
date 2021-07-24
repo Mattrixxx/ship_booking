@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <h1>User</h1>
-
+  <div id="user">
+    <div>
+      <tabuser/>
+    </div>
+    
     <div id="Table">
+      <h1>User </h1>
       <div id="search">
         <b-row>
           <b-col md="10">
@@ -158,8 +161,9 @@
 
 <script>
 import axios from 'axios'
-
+import tabuser from '../components/TabUser.vue'
 export default {
+  components:{tabuser},
   name: 'User',
   props: ['items'],
   data() {
