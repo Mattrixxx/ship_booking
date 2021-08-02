@@ -64,11 +64,12 @@
 <script></script>
 
 <style scoped>
+.nav {
+  margin: 0;
+}
 .nav-item > .nav-link {
-  /* background-color: pink; */
   color: rgb(211, 169, 169);
   font-size: 20px;
-  /* border: 1px solid rgb(226, 149, 162); */
 }
 .nav-item > .nav-link:hover {
   background-color: rgb(196, 196, 196);
