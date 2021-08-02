@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <sidebar/>
+      <sidebar />
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown right>
@@ -21,18 +21,18 @@
 import sidebar from '../components/Sidebar.vue'
 
 export default {
-  components:{sidebar},
+  components: { sidebar },
 }
 </script>
 
 <style scoped>
 .navbar {
-    padding:0px;
+  padding: 0px;
 }
 .navbar-collapse {
-    padding-right: 2.5%;
+  padding-right: 2.5%;
 }
 .bg-info {
-    background-color: #da8189!important;
+  background-color: #da8189 !important;
 }
 </style>

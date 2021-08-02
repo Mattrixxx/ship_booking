@@ -1,8 +1,5 @@
 <template>
   <div class="table2">
-    <!-- <b-button size="sm" variant="danger" @click="deleteData()"
-      ><b-icon icon="trash-fill"></b-icon
-    ></b-button> -->
     <b-table
       striped
       hover
