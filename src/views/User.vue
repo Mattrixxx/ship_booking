@@ -1,11 +1,11 @@
 <template>
   <div id="user">
     <div>
-      <tabuser/>
+      <tabuser />
     </div>
-    
+
     <div id="Table">
-      <h1>User </h1>
+      <h1>User</h1>
       <div id="search">
         <b-row>
           <b-col md="10">
@@ -152,6 +152,7 @@
             v-model="currentPage"
             :total-rows="row"
             :per-page="perPage"
+            align="right"
           ></b-pagination>
         </b-col>
       </b-row>
@@ -163,7 +164,7 @@
 import axios from 'axios'
 import tabuser from '../components/TabUser.vue'
 export default {
-  components:{tabuser},
+  components: { tabuser },
   name: 'User',
   props: ['items'],
   data() {
@@ -205,7 +206,7 @@ export default {
   },
   async mounted() {
     const result1 = await axios.get(this.apiURL)
-    this.users = result1.data.data
+    this.users = result1.data
   },
   methods: {
     async postData() {
@@ -213,7 +214,7 @@ export default {
       const result = await axios.post(this.apiURL, this.add)
       console.log(result)
       const result1 = await axios.get(this.apiURL)
-      this.users = result1.data.data
+      this.users = result1.data
     },
     async deleteData(id) {
       const del = await axios.delete(this.apiURL + id)

@@ -149,7 +149,7 @@ export default {
       const result = await axios.post(this.apiURL, this.add)
       console.log(result)
       const result1 = await axios.get(this.apiURL)
-      this.sailings = result1.data.data
+      this.sailings = result1.data
     },
     //  fun delete
     async deleteData(id) {

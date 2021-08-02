@@ -1,68 +1,68 @@
 <template>
   <div id="review">
     <div>
-      <tabuser/>
+      <tabuser />
     </div>
-     <div id="Table">
-    <h1>Review </h1>
+    <div id="Table">
+      <h1>Review</h1>
 
-    <div id="Table2">
-      <b-table
-        striped
-        hover
-        :items="reviews"
-        :filter="filter"
-        :per-page="perPage"
-        :current-page="currentPage"
-        :fields="fields"
-      >
-        <template v-slot:cell(actions)="data">
-          <b-button
-            variant="danger"
-            size="sm"
-            @click="showModal_del(data.item.id)"
-            ><b-icon icon="trash-fill"></b-icon
-          ></b-button>
-          <b-modal ref="modal-del" hide-footer title="Do you want to delete">
-            <!-- btnDel-Cancel -->
-            <b-button
-              class="mt-3"
-              block
-              variant="outline-success"
-              @click="hideModal_del"
-              >Cancel</b-button
-            >
-            <!-- btnDel-Del -->
-            <b-button
-              class="mt-2"
-              block
-              variant="outline-danger"
-              @click="delConfirm"
-              >Delete</b-button
-            >
-          </b-modal>
-        </template>
-      </b-table>
-    </div>
-    <b-row>
-      <b-col>
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="row"
+      <div id="Table2">
+        <b-table
+          striped
+          hover
+          :items="reviews"
+          :filter="filter"
           :per-page="perPage"
-        ></b-pagination>
-      </b-col>
-    </b-row>
+          :current-page="currentPage"
+          :fields="fields"
+        >
+          <template v-slot:cell(actions)="data">
+            <b-button
+              variant="danger"
+              size="sm"
+              @click="showModal_del(data.item.id)"
+              ><b-icon icon="trash-fill"></b-icon
+            ></b-button>
+            <b-modal ref="modal-del" hide-footer title="Do you want to delete">
+              <!-- btnDel-Cancel -->
+              <b-button
+                class="mt-3"
+                block
+                variant="outline-success"
+                @click="hideModal_del"
+                >Cancel</b-button
+              >
+              <!-- btnDel-Del -->
+              <b-button
+                class="mt-2"
+                block
+                variant="outline-danger"
+                @click="delConfirm"
+                >Delete</b-button
+              >
+            </b-modal>
+          </template>
+        </b-table>
+      </div>
+      <b-row>
+        <b-col>
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="row"
+            :per-page="perPage"
+            align="right"
+          ></b-pagination>
+        </b-col>
+      </b-row>
+    </div>
   </div>
-  </div>
- 
 </template>
 
 <script>
 import axios from 'axios'
 import tabuser from '../components/TabUser.vue'
 export default {
-  components:{tabuser},
+  components: { tabuser },
   name: 'Review',
   props: ['items'],
   data() {

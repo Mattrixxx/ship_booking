@@ -92,6 +92,7 @@
             v-model="currentPage"
             :total-rows="row"
             :per-page="perPage"
+            align="right"
           ></b-pagination>
         </b-col>
       </b-row>
