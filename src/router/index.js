@@ -8,6 +8,12 @@ import Review from '../views/Reviews.vue'
 import Package from '../views/Packages.vue'
 import Booking from '../views/Bookings.vue'
 import Sailing from '../views/Sailings.vue'
+import WebRaft from '../views/Web/Raft.vue'
+import WebPackage from '../views/Web/Package.vue'
+import WebBooking from '../views/Web/Booking.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import Home from '../views/Web/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +57,36 @@ const routes = [
     path: '/sailings',
     name: 'Sailing',
     component: Sailing,
+  },
+  {
+    path: '/webrafts',
+    name: 'WebRaft',
+    component: WebRaft,
+  },
+  {
+    path: '/webpackages',
+    name: 'WebPackage',
+    component: WebPackage,
+  },
+  {
+    path: '/webbookings',
+    name: 'WebBooking',
+    component: WebBooking,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
   }
 
 ]
