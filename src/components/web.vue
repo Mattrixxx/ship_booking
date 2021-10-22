@@ -2,11 +2,13 @@
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-collapse id="nav-collapse" is-nav>
-        <b-img src="../img/3.png" height="80px"></b-img>
+        <b-nav-item href="/home"
+          ><b-img src="../img/3.png" height="80px"></b-img
+        ></b-nav-item>
         <b-nav id="navbar-nav">
           <b-nav-item href="/webrafts">ข้อมูลแพ </b-nav-item>
           <b-nav-item href="/webpackages">แพ็คเกจ </b-nav-item>
-          <b-nav-item href="#">จองแพ็คเกจ </b-nav-item>
+          <b-nav-item href="/webbookings">จองแพ็คเกจ </b-nav-item>
           <b-nav-item href="#">รีวิว </b-nav-item>
           <b-nav-item-dropdown right>
             <template #button-content>
@@ -21,7 +23,7 @@
     </b-navbar>
   </div>
 </template>
-<style>
+<style scoped>
 .navbar {
   padding: 0px;
 }
@@ -48,5 +50,8 @@ a {
 }
 .nav-item :hover {
   color: #8b000c;
+}
+li {
+  list-style-type: none;
 }
 </style>

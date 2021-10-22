@@ -1,66 +1,61 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <h1>Register</h1>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto"> </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+    <div class="bg"></div>
     <b-container>
-      <div id="register">
-        <h2>Register From</h2>
-      </div>
       <b-card>
+        <h4>สมัครสมาชิก</h4>
         <b-form>
-          <b-form-group label="Name:"
+          <b-form-group label="ชื่อ :"
             ><b-form-input
               v-model="add.name"
               type="text"
-              placeholder="Enter name"
+              placeholder="ชื่อ"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="Surname:"
+          <b-form-group label="นามสกุล :"
             ><b-form-input
               v-model="add.sname"
               type="text"
-              placeholder="Enter surname"
+              placeholder="นามสกุล"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="Phone number:"
+          <b-form-group label="เบอร์ติดต่อ :"
             ><b-form-input
               v-model="add.phone"
               type="text"
-              placeholder="Enter phone number"
+              placeholder="เบอร์ติดต่อ"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="Username:"
+          <b-form-group label="ชื่อผู้ใช้ :"
             ><b-form-input
               v-model="add.username"
               type="text"
-              placeholder="Enter username"
+              placeholder="ชื่อผู้ใช้"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="Password:"
+          <b-form-group label="รหัสผ่าน :"
             ><b-form-input
               v-model="add.password"
               type="password"
-              placeholder="Enter password"
+              placeholder="รหัสผ่าน"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="Confirm password:"
+          <b-form-group label="ยืนยันรหัสผ่าน :"
             ><b-form-input
               v-model="cf_password"
               type="password"
-              placeholder="Enter confirm password"
+              placeholder="ยืนยันรหัสผ่าน"
               required
             ></b-form-input>
           </b-form-group>
-          <b-button variant="primary" @click="confirmPassword">Submit</b-button>
+          <b-button variant="primary" @click="confirmPassword"
+            >สมัครสมาชิก</b-button
+          >
         </b-form>
       </b-card>
     </b-container>
@@ -102,31 +97,52 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
-  padding: 0px;
+.bg {
+  background-image: url(.././img/BG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  filter: blur(4px);
 }
-.navbar-collapse {
-  padding-right: 2.5%;
-}
-.bg-info {
-  background-color: #da8189 !important;
-}
-h1 {
-  margin-left: 40px;
-}
-#register {
+h4 {
   text-align: center;
 }
 .card {
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  width: 500px;
+  width: 400px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border-radius: 3%;
+}
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 button {
   float: right;
 }
-h2 {
-  margin-top: 40px;
+.btn-primary {
+  color: rgb(0, 0, 0);
+  background: #b7dbc3;
+  border-color: #b7dbc3;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active {
+  color: #fff;
+  border-color: #38443c;
+  background-color: #38443c;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  border-color: #38443c;
+  background-color: #38443c;
 }
 </style>
