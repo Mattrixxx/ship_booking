@@ -29,28 +29,28 @@
         <nav class="mb-3">
           <b-nav vertical>
             <b-nav-item href="/users"
-              ><i class="fas fa-user"></i> User</b-nav-item
+              ><i class="fas fa-user"></i> ข้อมูลผู้ใช้</b-nav-item
             >
             <b-nav-item href="/drivers"
-              ><i class="fas fa-user-tie"></i> Driver</b-nav-item
+              ><i class="fas fa-user-tie"></i> ข้อมูลคนขับเรือ</b-nav-item
             >
             <b-nav-item href="/boats"
-              ><i class="fas fa-ship"></i> Boat</b-nav-item
+              ><i class="fas fa-ship"></i> ข้อมูลเรือ</b-nav-item
             >
             <b-nav-item href="/rafts"
-              ><i class="fas fa-bed"></i> Raft</b-nav-item
+              ><i class="fas fa-bed"></i> ข้อมูลแพ</b-nav-item
             >
             <b-nav-item href="/packages"
-              ><i class="fas fa-suitcase-rolling"></i> Package</b-nav-item
+              ><i class="fas fa-suitcase-rolling"></i> ข้อมูลแพ็คเกจ</b-nav-item
             >
             <b-nav-item href="/bookings"
-              ><i class="fas fa-list-alt"></i> Booking</b-nav-item
+              ><i class="fas fa-list-alt"></i> ข้อมูลการจอง</b-nav-item
             >
             <b-nav-item href="/sailings"
-              ><i class="fas fa-receipt"></i> Sailing</b-nav-item
+              ><i class="fas fa-receipt"></i> ข้อมูลการออกเรือ</b-nav-item
             >
             <b-nav-item href="/reviews"
-              ><i class="fas fa-star"></i> Review</b-nav-item
+              ><i class="fas fa-star"></i> ข้อมูลการรีวิว</b-nav-item
             >
           </b-nav>
         </nav>
@@ -92,5 +92,13 @@ button#side {
   color: #fff;
   border-color: #da8189 !important;
   background: #da8189 !important;
+  box-shadow: 0 0 0 0rem;
+}
+a {
+  margin-top: 10px;
+  margin-bottom: 9px;
+}
+img {
+  margin-bottom: 20px;
 }
 </style>

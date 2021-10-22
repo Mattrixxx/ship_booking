@@ -4,7 +4,7 @@
       <tabuser />
     </div>
     <div id="Table">
-      <h1>Sailing</h1>
+      <h1>ข้อมูลการออกเรือ</h1>
 
       <div id="Add">
         <b-button variant="success" size="sm" @click="showModal_add"
@@ -121,14 +121,14 @@ export default {
       currentPage: 1,
       fields: [
         { key: 'id', label: 'Id', sortable: true },
-        { key: 'driver.name', label: 'Name' },
-        { key: 'driver.sname', label: 'Surname' },
-        { key: 'driver.phone', label: 'Phone' },
-        { key: 'boat.name', label: 'Boat' },
-        { key: 'booking.price', label: 'Price' },
-        { key: 'depart_date', label: 'Depart_Date' },
-        { key: 'return_date', label: 'Return_Date' },
-        { key: 'actions', label: 'Action' },
+        { key: 'driver.name', label: 'ชื่อ' },
+        { key: 'driver.sname', label: 'นามสกุล' },
+        { key: 'driver.phone', label: 'เบอร์ติดต่อ' },
+        { key: 'boat.name', label: 'ชื่อเรือ' },
+        { key: 'booking.price', label: 'ราคา' },
+        { key: 'depart_date', label: 'วันออกเรือ' },
+        { key: 'return_date', label: 'วันกลับ' },
+        { key: 'actions', label: 'การดำเนินการ' },
       ],
     }
   },

@@ -4,7 +4,7 @@
       <tabuser />
     </div>
     <div id="Table">
-      <h1>Booking</h1>
+      <h1>ข้อมูลการจอง</h1>
 
       <div id="Add">
         <!-- buttonAdd -->
@@ -23,6 +23,9 @@
           :current-page="currentPage"
           :fields="fields"
         >
+          <template #cell(img)="row">
+            <img :src="row.value" width="200" />
+          </template>
           <template v-slot:cell(actions)="data">
             <!-- buttonDelete -->
             <b-button
@@ -121,16 +124,16 @@ export default {
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'id', label: 'Id', sortable: true },
-        { key: 'user.username', label: 'Username' },
-        { key: 'user.phone', label: 'Phone' },
-        { key: 'value', label: 'Value' },
-        { key: 'price', label: 'Price' },
-        { key: 'booking_date', label: 'Booing' },
-        { key: 'travel_date', label: 'Travel' },
-        { key: 'payment', label: 'Payment' },
-        { key: 'status', label: 'Status' },
-        { key: 'actions', label: 'Action' },
+        { key: 'id', label: 'ลำดับ', sortable: true },
+        { key: 'user.username', label: 'ชื่อผู้ใช้งาน' },
+        { key: 'user.phone', label: 'เบอร์ติดต่อ' },
+        { key: 'value', label: 'จำนวนที่นั่ง' },
+        { key: 'price', label: 'ราคา' },
+        { key: 'booking_date', label: 'วันที่จอง' },
+        { key: 'travel_date', label: 'วันออกเรือ' },
+        { key: 'payment', label: 'หลักฐานการชำระเงิน' },
+        { key: 'status', label: 'สถานะ' },
+        { key: 'actions', label: 'การดำเนินการ' },
       ],
     }
   },

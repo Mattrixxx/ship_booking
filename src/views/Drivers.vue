@@ -4,8 +4,7 @@
       <tabuser />
     </div>
     <div id="Table">
-      <h1>Driver</h1>
-      <!-- buttonAdd -->
+      <h1>ข้อมูลคนขับเรือ</h1>
       <div id="Add">
         <b-button variant="success" size="sm" @click="showModal_add"
           ><b-icon icon="plus-square-fill"></b-icon
@@ -22,108 +21,146 @@
           :fields="fields"
         >
           <template v-slot:cell(actions)="data">
-            <!-- buttonEdit -->
             <b-button
               variant="warning"
               size="sm"
               @click="showModal_edit(data.item)"
               ><b-icon icon="pencil-square"></b-icon
             ></b-button>
-            <!-- buttonDelete -->
             <b-button
               variant="danger"
               size="sm"
-              @click="showModal_del(data.item.id)"
+              @click="showModal_del(data.item)"
               ><b-icon icon="trash-fill"></b-icon
             ></b-button>
-            <b-modal ref="modal-del" hide-footer title="Do you want to delete">
-              <!-- btnDel-Cancel -->
-              <b-button
-                class="mt-3"
-                block
-                variant="outline-success"
-                @click="hideModal_del"
-                >Cancel</b-button
-              >
-              <!-- btnDel-Del -->
-              <b-button
-                class="mt-2"
-                block
-                variant="outline-danger"
-                @click="delConfirm"
-                >Delete</b-button
-              >
+            <b-modal
+              ref="modal-del"
+              hide-footer
+              title="คุณต้องการลบข้อมูลต่อไปนี้หรือไม่"
+            >
+              <p>ลำดับ : {{ delItem.id }}</p>
+              <p>ชื่อ-สกุล : {{ delItem.name }} {{ delItem.sname }}</p>
+              <p>เบอร์ติดต่อ : {{ delItem.phone }}</p>
+              <div id="btn_delete">
+                <b-button
+                  id="btd_delete"
+                  variant="danger"
+                  size="sm"
+                  @click="delConfirm"
+                  >ลบข้อมูล</b-button
+                >
+                <b-button variant="success" size="sm" @click="hideModal_del()"
+                  >ยกเลิก</b-button
+                >
+              </div>
             </b-modal>
-            <!-- textAdd -->
-            <b-modal ref="modal-add" hide-footer title="ADD">
+
+            <b-modal ref="modal-add" hide-footer title="เพิ่มข้อมูลคนขับเรือ">
               <div class="d-block text-center"></div>
-              <!-- txt name -->
-              <b-form-group label="Name Driver:"
+
+              <b-form-group label="ชื่อคนขับเรือ :"
                 ><b-form-input
                   v-model="add.name"
                   type="text"
-                  placeholder="Enter name"
+                  placeholder="ชื่อคนขับเรือ"
                 ></b-form-input
               ></b-form-group>
-              <!-- txt sname -->
-              <b-form-group label="Surname Driver:">
+
+              <b-form-group label="นามสกุลคนขับเรือ :">
                 <b-form-input
                   v-model="add.sname"
                   type="text"
-                  placeholder="Enter surname"
+                  placeholder="นามสกุลคนขับเรือ"
                 ></b-form-input
               ></b-form-group>
-              <!-- txt phone -->
-              <b-form-group label="Phone Driver:">
+
+              <b-form-group label="เบอร์ติดต่อคนขับเรือ :">
                 <b-form-input
                   type="text"
                   v-model="add.phone"
-                  placeholder="Enter Phone"
+                  placeholder="เบอร์ติดต่อคนขับเรือ"
                 >
                 </b-form-input>
               </b-form-group>
-              <!-- btnAdd -->
-              <b-button variant="success" size="sm" @click="postData"
-                >ADD</b-button
-              >
+
+              <div id="btn_add">
+                <b-button
+                  id="bta_add"
+                  variant="success"
+                  size="sm"
+                  @click="hideModal_add(), showModal_cfadd()"
+                  >เพิ่มข้อมูล</b-button
+                ><b-button variant="danger" size="sm" @click="hideModal_add()"
+                  >ยกเลิก</b-button
+                >
+              </div>
             </b-modal>
-            <!-- textEdit -->
-            <b-modal ref="modal-edit" hide-footer title="EDIT">
-              <!-- txt name -->
-              <b-form-group label="Name Driver:"
+            <b-modal
+              ref="modal-cfadd"
+              hide-footer
+              title="คุณต้องการเพิ่มข้อมูลต่อไปนี้ใช่หรือไม่"
+              class="modalCfAdd"
+            >
+              <p>ชื่อ-สกุล คนขับเรือ : {{ add.name }} {{ add.sname }}</p>
+              <p>เบอร์ติดต่อคนขับเรือ : {{ add.phone }}</p>
+              <div id="btn_add">
+                <b-button
+                  id="bta_add"
+                  variant="success"
+                  size="sm"
+                  @click="postData(), hideModal_cfadd()"
+                  >เพิ่มข้อมูล</b-button
+                ><b-button
+                  variant="danger"
+                  size="sm"
+                  @click="hideModal_cfadd(), showModal_add()"
+                  >ยกเลิก</b-button
+                >
+              </div>
+            </b-modal>
+
+            <b-modal ref="modal-edit" hide-footer title="แก้ไขข้อมูลคนขับเรือ">
+              <b-form-group label="ชื่อคนขับเรือ :"
                 ><b-form-input
                   v-model="editItem.name"
                   type="text"
-                  placeholder="Enter name"
+                  placeholder="ชื่อคนขับเรือ"
                 ></b-form-input
               ></b-form-group>
-              <!-- txt sname -->
-              <b-form-group label="Surname Driver:">
+
+              <b-form-group label="นามสกุลคนขับเรือ :">
                 <b-form-input
                   v-model="editItem.sname"
                   type="text"
-                  placeholder="Enter Surname"
+                  placeholder="นามสกุลคนขับเรือ"
                 ></b-form-input
               ></b-form-group>
-              <!-- txt phone -->
-              <b-form-group label="Phone Driver:">
+
+              <b-form-group label="เบอร์ติดต่อคนขับเรือ :">
                 <b-form-input
                   type="text"
                   v-model="editItem.phone"
-                  placeholder="Enter phone"
+                  placeholder="เบอร์ติดต่อคนขับเรือ"
                 ></b-form-input>
               </b-form-group>
-              <!-- btnEdit -->
-              <b-button variant="success" size="sm" @click="editData"
-                >Edit</b-button
-              >
+
+              <div id="btn_add">
+                <b-button
+                  id="bta_add"
+                  variant="success"
+                  size="sm"
+                  @click="editData()"
+                  >แก้ไข</b-button
+                ><b-button variant="danger" size="sm" @click="hideModal_edit()"
+                  >ยกเลิก</b-button
+                >
+              </div>
             </b-modal>
           </template>
         </b-table>
       </div>
       <b-row>
         <b-col>
-          <!-- กำหนดจำนวนการแสดง -->
           <b-pagination
             v-model="currentPage"
             :total-rows="row"
@@ -158,16 +195,22 @@ export default {
         sname: '',
         phone: '',
       },
+      delItem: {
+        id: '',
+        name: '',
+        sname: '',
+        phone: '',
+      },
       apiURL: 'http://promtongyai.xyz:3000/driver/',
       filter: '',
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'id', label: 'Id', sortable: true },
-        { key: 'name', label: 'Name' },
-        { key: 'sname', label: 'Sname' },
-        { key: 'phone', label: 'Phone' },
-        { key: 'actions', label: 'Action' },
+        { key: 'id', label: 'ลำดับ', sortable: true },
+        { key: 'name', label: 'ชื่อ' },
+        { key: 'sname', label: 'นามสกุล' },
+        { key: 'phone', label: 'เบอร์ติดต่อ' },
+        { key: 'actions', label: 'การดำเนินการ' },
       ],
     }
   },
@@ -176,53 +219,54 @@ export default {
       return this.drivers.length
     },
   },
-  //  fun show
   async mounted() {
     const result1 = await axios.get(this.apiURL)
-    this.drivers = result1.data
+    this.drivers = result1.data.data
   },
   methods: {
-    //  fun add
     async postData() {
-      this.hideModal_add()
       const result = await axios.post(this.apiURL, this.add)
       console.log(result)
       const result1 = await axios.get(this.apiURL)
       this.drivers = result1.data.data
     },
-    //  fun delete
     async deleteData(id) {
       const del = await axios.delete(this.apiURL + id)
       console.log(del)
       this.$router.go()
     },
-    //  fun edit
     async editData() {
       const edit = await axios.put(this.apiURL, this.editItem)
       console.log(edit)
       this.$router.go()
     },
-    // show popup delete
-    showModal_del(id) {
+    showModal_del(item) {
       this.$refs['modal-del'].show()
+      const { name, sname, id, phone } = item
+      this.delItem.name = name
+      this.delItem.sname = sname
+      this.delItem.phone = phone
+      this.delItem.id = id
       this.deleteItem = id
     },
-    // delete confirm
     delConfirm() {
       this.deleteData(this.deleteItem)
-      // close popup
     },
     hideModal_del() {
       this.$refs['modal-del'].hide()
     },
-    // show popup add
     showModal_add() {
       this.$refs['modal-add'].show()
     },
     hideModal_add() {
       this.$refs['modal-add'].hide()
     },
-    // show popup edit
+    showModal_cfadd() {
+      this.$refs['modal-cfadd'].show()
+    },
+    hideModal_cfadd() {
+      this.$refs['modal-cfadd'].hide()
+    },
     showModal_edit(item) {
       const { name, sname, phone, id } = item
       this.$refs['modal-edit'].show()
@@ -230,6 +274,9 @@ export default {
       this.editItem.sname = sname
       this.editItem.phone = phone
       this.editItem.id = id
+    },
+    hideModal_edit() {
+      this.$refs['modal-edit'].hide()
     },
   },
 }
@@ -244,9 +291,6 @@ export default {
   margin-top: 30px;
   text-align: center;
 }
-/* #search-add{
-  float: right;
-} */
 #Table h1 {
   text-align: center;
   color: rgb(84, 105, 124);

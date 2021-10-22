@@ -30,7 +30,7 @@ export default {
   },
   async mounted() {
     const result1 = await axios.get(this.apiURL)
-    this.rafts = result1.data
+    this.rafts = result1.data.data
   },
 }
 </script>

@@ -5,14 +5,14 @@
     </div>
 
     <div id="Table">
-      <h1>User</h1>
+      <h1>ข้อมูลผู้ใช้</h1>
       <div id="search">
         <b-row>
           <b-col md="10">
             <b-form-input
               v-model="filter"
               type="search"
-              placeholder="Search..."
+              placeholder="ค้นหา..."
             ></b-form-input>
           </b-col>
           <b-button variant="success" size="sm" @click="showModal_add"
@@ -42,107 +42,163 @@
                 <b-button
                   variant="danger"
                   size="sm"
-                  @click="showModal_del(data.item.id)"
+                  @click="showModal_del(data.item)"
                   ><b-icon icon="trash-fill"></b-icon
                 ></b-button>
                 <b-modal
                   ref="modal-del"
                   hide-footer
-                  title="Do you want to delete"
+                  title="คุณต้องการลบข้อมูลต่อไปนี้หรือไม่"
                 >
-                  <b-button
-                    class="mt-3"
-                    block
-                    variant="outline-success"
-                    @click="hideModal_del"
-                    >Cancel</b-button
-                  >
-                  <b-button
-                    class="mt-2"
-                    block
-                    variant="outline-danger"
-                    @click="delConfirm"
-                    >Delete</b-button
-                  >
+                  <p>ลำดับ : {{ delItem.id }}</p>
+                  <p>ชื่อ-สกุล : {{ delItem.name }} {{ delItem.sname }}</p>
+                  <p>เบอร์ติดต่อ : {{ delItem.phone }}</p>
+                  <p>ชื่อผู้ใช้ : {{ delItem.username }}</p>
+                  <div id="btn_delete">
+                    <b-button
+                      id="btd_delete"
+                      variant="danger"
+                      size="sm"
+                      @click="delConfirm"
+                      >ลบข้อมูล</b-button
+                    >
+                    <b-button
+                      variant="success"
+                      size="sm"
+                      @click="hideModal_del()"
+                      >ยกเลิก</b-button
+                    >
+                  </div>
                 </b-modal>
-                <b-modal ref="modal-add" hide-footer title="ADD">
+                <b-modal
+                  ref="modal-add"
+                  hide-footer
+                  title="เพิ่มข้อมูลผู้ใช้"
+                  class="modalAdd"
+                >
                   <div class="d-block text-center"></div>
-                  <b-form-group label="Name:"
+                  <b-form-group label="ชื่อ :"
                     ><b-form-input
                       v-model="add.name"
                       type="text"
-                      placeholder="Enter name"
+                      placeholder="ชื่อ"
                     ></b-form-input
                   ></b-form-group>
-                  <b-form-group label="Surname:">
+                  <b-form-group label="นามสกุล :">
                     <b-form-input
                       v-model="add.sname"
                       type="text"
-                      placeholder="Enter surname"
+                      placeholder="นามสกุล"
                     ></b-form-input
                   ></b-form-group>
-                  <b-form-group label="Phone number:">
+                  <b-form-group label="เบอร์ติดต่อ :">
                     <b-form-input
                       type="text"
                       v-model="add.phone"
-                      placeholder="Enter phone number"
+                      placeholder="เบอร์ติดต่อ"
                     >
                     </b-form-input>
                   </b-form-group>
-                  <b-form-group label="Username:">
+                  <b-form-group label="ชื่อผู้ใช้ :">
                     <b-form-input
                       type="text"
                       v-model="add.username"
-                      placeholder="Enter username"
+                      placeholder="ชื่อผู้ใช้"
                     >
                     </b-form-input>
                   </b-form-group>
-                  <b-form-group label="Password:">
+                  <b-form-group label="รหัสผ่าน :">
                     <b-form-input
                       type="password"
                       v-model="add.password"
-                      placeholder="Enter password"
+                      placeholder="รหัสผ่าน"
                     >
                     </b-form-input>
                   </b-form-group>
-                  <b-form-group label="Confirm password:">
+                  <b-form-group label="ยืนยันรหัสผ่าน :">
                     <b-form-input
                       type="password"
                       v-model="cf_password"
-                      placeholder="Enter confirm-password"
+                      placeholder="ยืนยันรหัสผ่าน"
                     >
                     </b-form-input>
                   </b-form-group>
-                  <b-button variant="success" size="sm" @click="confirmPassword"
-                    >ADD</b-button
-                  >
+                  <div id="btn_add">
+                    <b-button
+                      id="bta_add"
+                      variant="success"
+                      size="sm"
+                      @click="confirmPassword()"
+                      >เพิ่มข้อมูล</b-button
+                    ><b-button
+                      variant="danger"
+                      size="sm"
+                      @click="hideModal_add()"
+                      >ยกเลิก</b-button
+                    >
+                  </div>
                 </b-modal>
-                <b-modal ref="modal-edit" hide-footer title="EDIT">
-                  <b-form-group label="Name:"
+                <b-modal
+                  ref="modal-cfadd"
+                  hide-footer
+                  title="คุณต้องการเพิ่มข้อมูลต่อไปนี้ใช่หรือไม่"
+                  class="modalCfAdd"
+                >
+                  <p>ชื่อ-สกุล : {{ add.name }} {{ add.sname }}</p>
+                  <p>เบอร์ติดต่อ : {{ add.phone }}</p>
+                  <p>ชื่อผู้ใช้ : {{ add.username }}</p>
+                  <div id="btn_add">
+                    <b-button
+                      id="bta_add"
+                      variant="success"
+                      size="sm"
+                      @click="postData(), hideModal_cfadd()"
+                      >เพิ่มข้อมูล</b-button
+                    ><b-button
+                      variant="danger"
+                      size="sm"
+                      @click="hideModal_cfadd(), showModal_add()"
+                      >ยกเลิก</b-button
+                    >
+                  </div>
+                </b-modal>
+                <b-modal ref="modal-edit" hide-footer title="แก้ไขข้อมูลผู้ใช้">
+                  <b-form-group label="ชื่อ :"
                     ><b-form-input
                       v-model="editItem.name"
                       type="text"
-                      placeholder="Enter name"
+                      placeholder="ชื่อ"
                     ></b-form-input
                   ></b-form-group>
-                  <b-form-group label="Surname:">
+                  <b-form-group label="นามสกุล :">
                     <b-form-input
                       v-model="editItem.sname"
                       type="text"
-                      placeholder="Enter surname"
+                      placeholder="นามสกุล"
                     ></b-form-input
                   ></b-form-group>
-                  <b-form-group label="Phone number:">
+                  <b-form-group label="เบอร์ติดต่อ :">
                     <b-form-input
                       type="text"
                       v-model="editItem.phone"
-                      placeholder="Enter phone number"
+                      placeholder="เบอร์ติดต่อ"
                     >
                     </b-form-input>
                   </b-form-group>
-                  <b-button variant="success" size="sm" @click="editData"
-                    >Edit</b-button
-                  >
+                  <div id="btn_add">
+                    <b-button
+                      id="bta_add"
+                      variant="success"
+                      size="sm"
+                      @click="editData()"
+                      >แก้ไข</b-button
+                    ><b-button
+                      variant="danger"
+                      size="sm"
+                      @click="hideModal_edit()"
+                      >ยกเลิก</b-button
+                    >
+                  </div>
                 </b-modal>
               </template>
             </b-table>
@@ -185,17 +241,24 @@ export default {
         sname: '',
         phone: '',
       },
+      delItem: {
+        id: '',
+        name: '',
+        sname: '',
+        phone: '',
+        username: '',
+      },
       apiURL: 'http://promtongyai.xyz:3000/user/',
       filter: '',
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'id', label: 'Id', sortable: true },
-        { key: 'name', label: 'Name' },
-        { key: 'sname', label: 'Surname' },
-        { key: 'phone', label: 'Phone' },
-        { key: 'username', label: 'Username' },
-        { key: 'actions', label: 'Action' },
+        { key: 'id', label: 'ลำดับ', sortable: true },
+        { key: 'name', label: 'ชื่อ' },
+        { key: 'sname', label: 'นามสกุล' },
+        { key: 'phone', label: 'เบอร์ติดต่อ' },
+        { key: 'username', label: 'ชื่อผู้ใช้' },
+        { key: 'actions', label: 'การดำเนินการ' },
       ],
     }
   },
@@ -206,7 +269,7 @@ export default {
   },
   async mounted() {
     const result1 = await axios.get(this.apiURL)
-    this.users = result1.data
+    this.users = result1.data.data
   },
   methods: {
     async postData() {
@@ -214,7 +277,7 @@ export default {
       const result = await axios.post(this.apiURL, this.add)
       console.log(result)
       const result1 = await axios.get(this.apiURL)
-      this.users = result1.data
+      this.users = result1.data.data
     },
     async deleteData(id) {
       const del = await axios.delete(this.apiURL + id)
@@ -226,8 +289,14 @@ export default {
       console.log(edit)
       this.$router.go()
     },
-    showModal_del(id) {
+    showModal_del(item) {
       this.$refs['modal-del'].show()
+      const { name, sname, id, phone, username } = item
+      this.delItem.name = name
+      this.delItem.sname = sname
+      this.delItem.phone = phone
+      this.delItem.id = id
+      this.delItem.username = username
       this.deleteItem = id
     },
     delConfirm() {
@@ -242,6 +311,12 @@ export default {
     hideModal_add() {
       this.$refs['modal-add'].hide()
     },
+    showModal_cfadd() {
+      this.$refs['modal-cfadd'].show()
+    },
+    hideModal_cfadd() {
+      this.$refs['modal-cfadd'].hide()
+    },
     showModal_edit(item) {
       const { name, sname, id, phone } = item
       this.$refs['modal-edit'].show()
@@ -250,9 +325,13 @@ export default {
       this.editItem.phone = phone
       this.editItem.id = id
     },
+    hideModal_edit() {
+      this.$refs['modal-edit'].hide()
+    },
     confirmPassword() {
       if (this.cf_password == this.add.password) {
-        this.postData()
+        this.hideModal_add()
+        this.showModal_cfadd()
       } else {
         alert('Error')
       }
@@ -274,10 +353,20 @@ export default {
   margin-top: 0px;
   text-align: center;
 }
-/* #search-add{
-  float: right;
-} */
 h1 {
   text-align: center;
+}
+#bta_add,
+#btd_delete {
+  margin-right: 10px;
+}
+#btn_add,
+#btn_delete {
+  float: right;
+}
+#btn_add button,
+#btn_edit button,
+#btn_delete button {
+  padding: 8px;
 }
 </style>

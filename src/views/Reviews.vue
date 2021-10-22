@@ -4,7 +4,7 @@
       <tabuser />
     </div>
     <div id="Table">
-      <h1>Review</h1>
+      <h1>ข้อมูลการรีวิว</h1>
 
       <div id="Table2">
         <b-table
@@ -20,26 +20,29 @@
             <b-button
               variant="danger"
               size="sm"
-              @click="showModal_del(data.item.id)"
+              @click="showModal_del(data.item)"
               ><b-icon icon="trash-fill"></b-icon
             ></b-button>
-            <b-modal ref="modal-del" hide-footer title="Do you want to delete">
-              <!-- btnDel-Cancel -->
-              <b-button
-                class="mt-3"
-                block
-                variant="outline-success"
-                @click="hideModal_del"
-                >Cancel</b-button
-              >
-              <!-- btnDel-Del -->
-              <b-button
-                class="mt-2"
-                block
-                variant="outline-danger"
-                @click="delConfirm"
-                >Delete</b-button
-              >
+            <b-modal
+              ref="modal-del"
+              hide-footer
+              title="คุณต้องการลบข้อมูลต่อไปนี้หรือไม่"
+            >
+              <p>ลำดับ : {{ delItem.id }}</p>
+              <p>รีวิว : {{ delItem.detail }}</p>
+              <p>คะแนน : {{ delItem.rank }}</p>
+              <div id="btn_delete">
+                <b-button
+                  id="btd_delete"
+                  variant="danger"
+                  size="sm"
+                  @click="delConfirm"
+                  >ลบข้อมูล</b-button
+                >
+                <b-button variant="success" size="sm" @click="hideModal_del()"
+                  >ยกเลิก</b-button
+                >
+              </div>
             </b-modal>
           </template>
         </b-table>
@@ -74,12 +77,17 @@ export default {
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'id', label: 'Id', sortable: true },
-        { key: 'detail', label: 'Detail' },
-        { key: 'rank', label: 'Rank' },
-        { key: 'user.username', label: 'Username' },
-        { key: 'actions', label: 'Action' },
+        { key: 'id', label: 'ลำดับ', sortable: true },
+        { key: 'detail', label: 'รีวิว' },
+        { key: 'rank', label: 'คะแนน' },
+        { key: 'user.username', label: 'ชื่อผู้ใช้งาน' },
+        { key: 'actions', label: 'การดำเนินการ' },
       ],
+      delItem: {
+        id: '',
+        detail: '',
+        rank: '',
+      },
     }
   },
   computed: {
@@ -99,8 +107,12 @@ export default {
       this.$router.go()
     },
     // show popup delete
-    showModal_del(id) {
+    showModal_del(item) {
       this.$refs['modal-del'].show()
+      const { id, detail, rank } = item
+      this.delItem.name = name
+      this.delItem.detail = detail
+      this.delItem.rank = rank
       this.deleteItem = id
     },
     // delete confirm
